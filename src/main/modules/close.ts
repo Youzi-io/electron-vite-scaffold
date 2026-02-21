@@ -1,8 +1,8 @@
-import { ipcMain, app } from "electron";
+import { ipcMain, app } from 'electron'
 
 // 退出
-export function quitWindow() {
-  ipcMain.on("quit:application", () => {
+export function quitWindow(): void {
+  ipcMain.on('quit:application', () => {
     app.quit()
-  });
+  })
 }

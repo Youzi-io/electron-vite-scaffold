@@ -22,7 +22,7 @@ export default class CommonWindow {
     this.initWindow()
   }
 
-  private async initWindow() {
+  private async initWindow(): Promise<void> {
     if (this.win) {
       this.win.on('ready-to-show', () => {
         this.win!.show()
@@ -43,7 +43,7 @@ export default class CommonWindow {
       }
       this.win?.on('close', () => {
         // 窗口退出时发送
-        ; (this.win as BrowserWindow).webContents.send('window-close')
+        ;(this.win as BrowserWindow).webContents.send('window-close')
         this.win = null // 删除引用，释放内存，防止内存泄露
       })
     } else Promise.reject(new Error('Variable window is undefined.'))
@@ -58,7 +58,7 @@ export default class CommonWindow {
    * 获取窗口类型
    * @returns {ElectronWindowType}
    */
-  getType() {
+  getType(): ElectronWindowType {
     return this.windowType
   }
 
@@ -66,21 +66,21 @@ export default class CommonWindow {
    * 获取 Window 实例
    * @returns {BrowserWindow} Electron 视窗实例
    */
-  getWindow() {
+  getWindow(): BrowserWindow | null {
     return this.win
   }
 
   /**
    * 软关闭页面
    */
-  close() {
+  close(): void {
     this.win && this.win.close()
   }
 
   /**
    * 销毁页面实例
    */
-  destroy() {
+  destroy(): void {
     this.win && this.win.destroy()
   }
 }
